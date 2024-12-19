@@ -1,129 +1,82 @@
-import { StyleSheet, Image, Platform } from 'react-native';
+import React from 'react';
+import {
+	View,
+	Text,
+	FlatList,
+	TouchableOpacity,
+	Alert,
+	StyleSheet,
+} from 'react-native';
 
-import { Collapsible } from '@/components/Collapsible';
-import { ExternalLink } from '@/components/ExternalLink';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
-import { ThemedView } from '@/components/ThemedView';
-import { IconSymbol } from '@/components/ui/IconSymbol';
+const App = () => {
+	const users = [
+		{ id: '1', name: 'John', email: 'John@example' },
+		{ id: '2', name: 'Jane', email: 'Jane@example' },
+		{ id: '3', name: 'Mike', email: 'Mike@example' },
+		{ id: '4', name: 'Emma', email: 'Emma@example' },
+		{ id: '5', name: 'David', email: 'David@example' },
+		{ id: '6', name: 'Olivia', email: 'Olivia@example' },
+		{ id: '7', name: 'Sophia', email: 'Sophia@example' },
+		{ id: '8', name: 'Isabella', email: 'Isabella@example' },
+		{ id: '9', name: 'Amelia', email: 'Amelia@example' },
+		{ id: '10', name: 'Harper', email: 'Harper@example' },
+	];
 
-export default function TabTwoScreen() {
-	return (
-		<ParallaxScrollView
-			headerBackgroundColor={{ light: '#D0D0D0', dark: '#353636' }}
-			headerImage={
-				<IconSymbol
-					size={310}
-					color='#808080'
-					name='chevron.left.forwardslash.chevron.right'
-					style={styles.headerImage}
-				/>
-			}
+	const handlePress = (name: string) => {
+		Alert.alert('მომხმარებლის ინფორმაცია', `სახელი: ${name}`);
+	};
+
+	const renderItem = ({
+		item,
+	}: {
+		item: { id: string; name: string; email: string };
+	}) => (
+		<TouchableOpacity
+			onPress={() => handlePress(item.name)}
+			style={styles.item}
 		>
-			<ThemedView style={styles.titleContainer}>
-				<ThemedText type='title'>Explore</ThemedText>
-			</ThemedView>
-			<ThemedText>
-				This app includes example code to help you get started.
-			</ThemedText>
-			<Collapsible title='File-based routing'>
-				<ThemedText>
-					This app has two screens:{' '}
-					<ThemedText type='defaultSemiBold'>app/(tabs)/index.tsx</ThemedText>{' '}
-					and{' '}
-					<ThemedText type='defaultSemiBold'>app/(tabs)/explore.tsx</ThemedText>
-				</ThemedText>
-				<ThemedText>
-					The layout file in{' '}
-					<ThemedText type='defaultSemiBold'>app/(tabs)/_layout.tsx</ThemedText>{' '}
-					sets up the tab navigator.
-				</ThemedText>
-				<ExternalLink href='https://docs.expo.dev/router/introduction'>
-					<ThemedText type='link'>Learn more</ThemedText>
-				</ExternalLink>
-			</Collapsible>
-			<Collapsible title='Android, iOS, and web support'>
-				<ThemedText>
-					You can open this project on Android, iOS, and the web. To open the
-					web version, press <ThemedText type='defaultSemiBold'>w</ThemedText>{' '}
-					in the terminal running this project.
-				</ThemedText>
-			</Collapsible>
-			<Collapsible title='Images'>
-				<ThemedText>
-					For static images, you can use the{' '}
-					<ThemedText type='defaultSemiBold'>@2x</ThemedText> and{' '}
-					<ThemedText type='defaultSemiBold'>@3x</ThemedText> suffixes to
-					provide files for different screen densities
-				</ThemedText>
-				<Image
-					source={require('@/assets/images/react-logo.png')}
-					style={{ alignSelf: 'center' }}
-				/>
-				<ExternalLink href='https://reactnative.dev/docs/images'>
-					<ThemedText type='link'>Learn more</ThemedText>
-				</ExternalLink>
-			</Collapsible>
-			<Collapsible title='Custom fonts'>
-				<ThemedText>
-					Open <ThemedText type='defaultSemiBold'>app/_layout.tsx</ThemedText>{' '}
-					to see how to load{' '}
-					<ThemedText style={{ fontFamily: 'SpaceMono' }}>
-						custom fonts such as this one.
-					</ThemedText>
-				</ThemedText>
-				<ExternalLink href='https://docs.expo.dev/versions/latest/sdk/font'>
-					<ThemedText type='link'>Learn more</ThemedText>
-				</ExternalLink>
-			</Collapsible>
-			<Collapsible title='Light and dark mode components'>
-				<ThemedText>
-					This template has light and dark mode support. The{' '}
-					<ThemedText type='defaultSemiBold'>useColorScheme()</ThemedText> hook
-					lets you inspect what the user's current color scheme is, and so you
-					can adjust UI colors accordingly.
-				</ThemedText>
-				<ExternalLink href='https://docs.expo.dev/develop/user-interface/color-themes/'>
-					<ThemedText type='link'>Learn more</ThemedText>
-				</ExternalLink>
-			</Collapsible>
-			<Collapsible title='Animations'>
-				<ThemedText>
-					This template includes an example of an animated component. The{' '}
-					<ThemedText type='defaultSemiBold'>
-						components/HelloWave.tsx
-					</ThemedText>{' '}
-					component uses the powerful{' '}
-					<ThemedText type='defaultSemiBold'>
-						react-native-reanimated
-					</ThemedText>{' '}
-					library to create a waving hand animation.
-				</ThemedText>
-				{Platform.select({
-					ios: (
-						<ThemedText>
-							The{' '}
-							<ThemedText type='defaultSemiBold'>
-								components/ParallaxScrollView.tsx
-							</ThemedText>{' '}
-							component provides a parallax effect for the header image.
-						</ThemedText>
-					),
-				})}
-			</Collapsible>
-		</ParallaxScrollView>
+			<Text style={styles.name}>{item.name}</Text>
+			<Text style={styles.email}>{item.email}</Text>
+		</TouchableOpacity>
 	);
-}
+
+	return (
+		<View className='flex p-11'>
+			<FlatList
+				data={users}
+				keyExtractor={item => item.id}
+				renderItem={renderItem}
+			/>
+		</View>
+	);
+};
 
 const styles = StyleSheet.create({
-	headerImage: {
-		color: '#808080',
-		bottom: -90,
-		left: -35,
-		position: 'absolute',
+	container: {
+		flex: 1,
+		padding: 16,
+		backgroundColor: '#f5f5f5',
 	},
-	titleContainer: {
-		flexDirection: 'row',
-		gap: 8,
+	item: {
+		padding: 16,
+		marginVertical: 8,
+		backgroundColor: '#fff',
+		borderRadius: 8,
+		shadowColor: '#000',
+		shadowOpacity: 0.1,
+		shadowOffset: { width: 0, height: 1 },
+		shadowRadius: 3,
+		elevation: 2,
+	},
+	name: {
+		fontSize: 18,
+		fontWeight: 'bold',
+		color: '#333',
+	},
+	email: {
+		fontSize: 14,
+		color: '#666',
 	},
 });
+
+export default App;
