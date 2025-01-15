@@ -1,12 +1,19 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Text, View } from 'react-native';
+import { Button, Text, useColorScheme, View } from 'react-native';
 
 import * as SplashScreen from 'expo-splash-screen';
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
-export default function App() {
+// Set the animation options. This is optional.
+SplashScreen.setOptions({
+	duration: 500,
+	fade: true,
+});
+
+export default function App({ onPressLearnMore }) {
+	const colorScheme = useColorScheme();
 	const [appIsReady, setAppIsReady] = useState(false);
 
 	useEffect(() => {
@@ -48,7 +55,18 @@ export default function App() {
 			style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
 			onLayout={onLayoutRootView}
 		>
-			<Text>SplashScreen Demo! 👋</Text>
+			<Text
+				className={` ${colorScheme === 'dark' ? 'text-white' : 'text-dark'}`}
+			>
+				SplashScreen Demo! 👋
+			</Text>
+
+			<Button
+				onPress={onPressLearnMore}
+				title='Learn More'
+				color='#841584'
+				accessibilityLabel='Learn more about this purple button'
+			/>
 		</View>
 	);
 }

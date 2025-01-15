@@ -1,5 +1,4 @@
 import { Image, StyleSheet, View, Text, useColorScheme } from 'react-native';
-
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { Link } from 'expo-router';
 

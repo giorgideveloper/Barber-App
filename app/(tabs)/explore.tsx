@@ -8,6 +8,11 @@ import {
 	StyleSheet,
 } from 'react-native';
 
+type User = {
+	id: string;
+	name: string;
+	email: string;
+};
 const App = () => {
 	const users = [
 		{ id: '1', name: 'John', email: 'John@example' },
