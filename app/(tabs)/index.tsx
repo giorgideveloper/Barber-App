@@ -17,7 +17,7 @@ export default function HomeScreen() {
 	};
 	return (
 		<ParallaxScrollView
-			headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+			headerBackgroundColor={{ light: '#A1CEDC', dark: '#F97239' }}
 			headerImage={
 				<Image
 					source={require('@/assets/images/booking-cover.jpg')}

@@ -1,5 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Button, Text, useColorScheme, View } from 'react-native';
+import {
+	Button,
+	Image,
+	Text,
+	TouchableOpacity,
+	useColorScheme,
+	View,
+} from 'react-native';
 
 import * as SplashScreen from 'expo-splash-screen';
 
@@ -12,7 +19,7 @@ SplashScreen.setOptions({
 	fade: true,
 });
 
-export default function App({ onPressLearnMore }) {
+export default function App({ onPressLearnMore }: any) {
 	const colorScheme = useColorScheme();
 	const [appIsReady, setAppIsReady] = useState(false);
 
@@ -52,21 +59,42 @@ export default function App({ onPressLearnMore }) {
 
 	return (
 		<View
-			style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
+			style={{
+				flex: 1,
+				alignItems: 'center',
+				justifyContent: 'center',
+				backgroundColor: '#F3ECDA',
+			}}
 			onLayout={onLayoutRootView}
 		>
-			<Text
-				className={` ${colorScheme === 'dark' ? 'text-white' : 'text-dark'}`}
-			>
-				SplashScreen Demo! 👋
+			<Text className='text-[#44513D] text-5xl font-bold  text-center'>
+				{' '}
+				BARBER SHOP
 			</Text>
-
-			<Button
-				onPress={onPressLearnMore}
-				title='Learn More'
-				color='#841584'
-				accessibilityLabel='Learn more about this purple button'
+			<Text className='text-2xl pb-5 text-[#F97239]'>CLIPPERS</Text>
+			<Image
+				source={require('../assets/images/barber.png')}
+				style={{ width: 220, height: 300 }}
 			/>
+			;
+			<Text
+				className={` ${
+					colorScheme === 'dark' ? 'text-dark' : 'text-dark'
+				} text-justify p-5`}
+			>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere nulla
+				eligendi dolore quos nobis eum aut asperiores praesentium! Natus vel a
+				libero nesciunt blanditiis sapiente alias iste tenetur dolor
+				repudiandae.
+			</Text>
+			<TouchableOpacity onPress={onPressLearnMore}>
+				<Text
+					style={{ fontSize: 20 }}
+					className='text-white bg-[#F97239] p-4 rounded-2xl '
+				>
+					ჯავშანის გაკეთება
+				</Text>
+			</TouchableOpacity>
 		</View>
 	);
 }
