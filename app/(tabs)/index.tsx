@@ -1,8 +1,8 @@
-import { Image, StyleSheet, View, Button, Alert } from 'react-native';
-import { HelloWave } from '@/components/HelloWave';
-import ParallaxScrollView from '@/components/ParallaxScrollView';
-import { ThemedText } from '@/components/ThemedText';
+import { View, Button, Alert, Text } from 'react-native';
+
 import { useState } from 'react';
+import HorizontalScrollCards from '@/components/HorizontaaalScrollCards';
+import AvalibleBarbers from '@/components/AvalibleBarbers';
 
 export default function HomeScreen() {
 	const [form, setForm] = useState({
@@ -16,20 +16,32 @@ export default function HomeScreen() {
 		console.log(form);
 	};
 	return (
-		<ParallaxScrollView
-			headerBackgroundColor={{ light: '#A1CEDC', dark: '#F97239' }}
-			headerImage={
-				<Image
-					source={require('@/assets/images/booking-cover.jpg')}
-					style={styles.reactLogo}
-				/>
-			}
+		<View
+			style={{
+				flex: 1,
+				justifyContent: 'center',
+				backgroundColor: '#F3ECDA',
+				padding: 20,
+			}}
 		>
-			<View style={styles.titleContainer}>
-				<ThemedText type='title'>დაჯავშნე ვიზიტი</ThemedText>
-				<HelloWave />
+			<View
+				style={{
+					flexDirection: 'row',
+					justifyContent: 'space-between',
+					marginTop: 40,
+				}}
+			>
+				<Text
+					className='text-start p-2 rounded-2xl drop-shadow-2xl text-white font-bold text-xl'
+					style={{ backgroundColor: '#808769' }}
+				>
+					Available Service
+				</Text>
 			</View>
-			<View className='bg-slate-700'>
+			<HorizontalScrollCards />
+			//TODO: Implement AvalibleBarbers component
+			<View> {/*  <AvalibleBarbers /> */}</View>
+			<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
 				<Button
 					title='ჯავშანის გაკეთება'
 					onPress={() => Alert.alert('Cannot press this one')}
@@ -64,27 +76,27 @@ export default function HomeScreen() {
 				/>
 				<Button title='Register' onPress={handleRegister} />
 			</View> */}
-		</ParallaxScrollView>
+		</View>
 	);
 }
 
-const styles = StyleSheet.create({
-	titleContainer: {
-		flexDirection: 'row',
-		alignItems: 'center',
-		gap: 8,
-	},
-	stepContainer: {
-		gap: 8,
-		marginBottom: 8,
-	},
-	reactLogo: {
-		height: 278,
-		width: 420,
-		bottom: 0,
-		left: 0,
-		position: 'absolute',
-	},
-	container: { flex: 1, padding: 20, justifyContent: 'center' },
-	input: { marginBottom: 10, borderWidth: 1, padding: 10, borderRadius: 5 },
-});
+// const styles = StyleSheet.create({
+// 	titleContainer: {
+// 		flexDirection: 'row',
+// 		alignItems: 'center',
+// 		gap: 8,
+// 	},
+// 	stepContainer: {
+// 		gap: 8,
+// 		marginBottom: 8,
+// 	},
+// 	reactLogo: {
+// 		height: 278,
+// 		width: 420,
+// 		bottom: 0,
+// 		left: 0,
+// 		position: 'absolute',
+// 	},
+// 	container: { flex: 1, padding: 20, justifyContent: 'center' },
+// 	input: { marginBottom: 10, borderWidth: 1, padding: 10, borderRadius: 5 },
+// });

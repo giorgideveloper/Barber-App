@@ -90,7 +90,7 @@ export default function App({ onPressLearnMore }: any) {
 			<TouchableOpacity onPress={onPressLearnMore}>
 				<Text
 					style={{ fontSize: 20 }}
-					className='text-white bg-[#F97239] p-4 rounded-2xl '
+					className='text-white bg-[#F97239] p-4 rounded-2xl font-bold '
 				>
 					ჯავშანის გაკეთება
 				</Text>
