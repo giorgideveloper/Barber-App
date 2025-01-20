@@ -1,7 +1,8 @@
 import React from 'react';
-import { ScrollView, Text, View, Image } from 'react-native';
+import { ScrollView, Text, View, Image, TouchableOpacity } from 'react-native';
 
 const HorizontalScrollCards = () => {
+	const [selectedId, setSelectedId] = React.useState<number | null>(null);
 	const cards = [
 		{
 			id: 1,
@@ -18,30 +19,34 @@ const HorizontalScrollCards = () => {
 		{ id: 7, title: 'Card 4', image: 'https://via.placeholder.com/150' },
 		{ id: 8, title: 'Card 4', image: 'https://via.placeholder.com/150' },
 	];
+	const handlePress = (card: any) => {
+		setSelectedId(card.id);
+		console.log(card);
+	};
 
 	return (
-		<View className='flex-1 bg-gray-100'>
+		<View className=''>
 			<ScrollView
 				horizontal
 				showsHorizontalScrollIndicator={false}
-				className='mt-5 px-4'
 				contentContainerStyle={{ paddingRight: 16 }}
 			>
 				{cards.map(card => (
-					<View
+					<TouchableOpacity
 						key={card.id}
-						className='mr-4  bg-white rounded-lg shadow-md overflow-hidden w-64 text-center justify-center items-center'
+						onPress={() => handlePress(card)}
+						className='mr-3  bg-white rounded-lg shadow-md overflow-hidden w-64 text-center justify-center items-center'
 						style={{
 							width: 150,
 							height: 200,
-							backgroundColor: 'white',
 							borderRadius: 10,
 							borderWidth: 0,
 							borderColor: 'gray',
 							overflow: 'hidden',
 							position: 'relative',
 							margin: 5,
-							marginTop: 15,
+							marginTop: 10,
+							backgroundColor: selectedId === card.id ? '#FA7235' : 'white',
 						}}
 					>
 						<Image
@@ -52,12 +57,15 @@ const HorizontalScrollCards = () => {
 						/>
 						<Text
 							className='text-lg font-semibold  font-bold'
-							style={{ color: '#FA7235', marginTop: 5 }}
+							style={{
+								marginTop: 5,
+								color: selectedId === card.id ? 'white' : '#FA7235',
+							}}
 						>
 							{card.title}
 						</Text>
 						<Text className='text-lg font-semibold '>$30.00</Text>
-					</View>
+					</TouchableOpacity>
 				))}
 			</ScrollView>
 		</View>

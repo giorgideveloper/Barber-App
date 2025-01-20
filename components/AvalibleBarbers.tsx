@@ -6,47 +6,62 @@ import {
 	TouchableOpacity,
 	Alert,
 	StyleSheet,
+	Image,
+	ImageSourcePropType,
 } from 'react-native';
 
 type User = {
 	id: string;
 	name: string;
 	email: string;
+	image: ImageSourcePropType;
 };
+
 const App = () => {
+	const [selectedId, setSelectedId] = React.useState<string | null>(null);
 	const users = [
-		{ id: '1', name: 'John', email: 'John@example' },
-		{ id: '2', name: 'Jane', email: 'Jane@example' },
-		{ id: '3', name: 'Mike', email: 'Mike@example' },
-		{ id: '4', name: 'Emma', email: 'Emma@example' },
-		{ id: '5', name: 'David', email: 'David@example' },
-		{ id: '6', name: 'Olivia', email: 'Olivia@example' },
-		{ id: '7', name: 'Sophia', email: 'Sophia@example' },
-		{ id: '8', name: 'Isabella', email: 'Isabella@example' },
-		{ id: '9', name: 'Amelia', email: 'Amelia@example' },
-		{ id: '10', name: 'Harper', email: 'Harper@example' },
+		{
+			id: '1',
+			name: 'John',
+			email: 'John@example',
+			image: require('../assets/images/user.png'),
+		},
+		{
+			id: '2',
+			name: 'Jane',
+			email: 'Jane@example',
+			image: require('../assets/images/user.png'),
+		},
+		{
+			id: '3',
+			name: 'Mike',
+			email: 'Mike@example',
+			image: require('../assets/images/user.png'),
+		},
 	];
 
-	const handlePress = (name: string) => {
-		Alert.alert('მომხმარებლის ინფორმაცია', `სახელი: ${name}`);
+	const handlePress = (id: string) => {
+		setSelectedId(id);
 	};
 
-	const renderItem = ({
-		item,
-	}: {
-		item: { id: string; name: string; email: string };
-	}) => (
+	const renderItem = ({ item }: { item: User }) => (
 		<TouchableOpacity
-			onPress={() => handlePress(item.name)}
-			style={styles.item}
+			onPress={() => handlePress(item.id)}
+			style={[
+				styles.item,
+				item.id === selectedId ? styles.selected : styles.item,
+			]}
 		>
-			<Text style={styles.name}>{item.name}</Text>
-			<Text style={styles.email}>{item.email}</Text>
+			<Image source={item.image} style={styles.image} />
+			<View style={{ marginLeft: 16 }}>
+				<Text style={styles.name}>{item.name}</Text>
+				<Text style={styles.email}>{item.email}</Text>
+			</View>
 		</TouchableOpacity>
 	);
 
 	return (
-		<View className='flex p-11'>
+		<View>
 			<FlatList
 				data={users}
 				keyExtractor={item => item.id}
@@ -63,6 +78,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#f5f5f5',
 	},
 	item: {
+		flexDirection: 'row',
 		padding: 16,
 		marginVertical: 8,
 		backgroundColor: '#fff',
@@ -81,6 +97,14 @@ const styles = StyleSheet.create({
 	email: {
 		fontSize: 14,
 		color: '#666',
+	},
+	image: {
+		width: 40,
+		height: 40,
+	},
+	selected: {
+		backgroundColor: '#FA7235',
+		color: '#fff',
 	},
 });
 

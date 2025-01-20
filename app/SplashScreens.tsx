@@ -68,7 +68,6 @@ export default function App({ onPressLearnMore }: any) {
 			onLayout={onLayoutRootView}
 		>
 			<Text className='text-[#44513D] text-5xl font-bold  text-center'>
-				{' '}
 				BARBER SHOP
 			</Text>
 			<Text className='text-2xl pb-5 text-[#F97239]'>CLIPPERS</Text>
@@ -76,7 +75,7 @@ export default function App({ onPressLearnMore }: any) {
 				source={require('../assets/images/barber.png')}
 				style={{ width: 220, height: 300 }}
 			/>
-			;
+
 			<Text
 				className={` ${
 					colorScheme === 'dark' ? 'text-dark' : 'text-dark'
