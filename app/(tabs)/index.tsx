@@ -4,6 +4,7 @@ import { useState } from 'react';
 import HorizontalScrollCards from '@/components/HorizontaaalScrollCards';
 import AvalibleBarbers from '@/components/AvalibleBarbers';
 import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
+import { Link } from 'expo-router';
 export default function HomeScreen() {
 	const [form, setForm] = useState({
 		name: '',
@@ -60,19 +61,28 @@ export default function HomeScreen() {
 							<AvalibleBarbers />
 						</View>
 						<View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
-							<Pressable
-								style={{
-									backgroundColor: '#FA7235',
-									justifyContent: 'center',
-									alignItems: 'center',
-									padding: 10,
-									borderRadius: 5,
-									marginBottom: 20,
+							<Link
+								href={{
+									pathname: '/Booking',
+									params: { propKey: 'propValue' }, // Pass props as query parameters
 								}}
-								onPress={() => Alert.alert('Cannot press this one')}
+								asChild
 							>
-								<Text className=' text-white font-bold text-lg'>გაგძელება</Text>
-							</Pressable>
+								<Pressable
+									style={{
+										backgroundColor: '#FA7235',
+										justifyContent: 'center',
+										alignItems: 'center',
+										padding: 10,
+										borderRadius: 5,
+										marginBottom: 20,
+									}}
+								>
+									<Text className=' text-white font-bold text-lg'>
+										გაგძელება
+									</Text>
+								</Pressable>
+							</Link>
 						</View>
 						{/* <View style={styles.container}>
 				<TextInput
