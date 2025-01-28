@@ -17,7 +17,7 @@ type User = {
 	image: ImageSourcePropType;
 };
 
-const App = () => {
+const App = ({ setUser }: any) => {
 	const [selectedId, setSelectedId] = React.useState<string | null>(null);
 	const users = [
 		{
@@ -42,6 +42,7 @@ const App = () => {
 
 	const handlePress = (id: string) => {
 		setSelectedId(id);
+		setUser(id);
 	};
 
 	const renderItem = ({ item }: { item: User }) => (

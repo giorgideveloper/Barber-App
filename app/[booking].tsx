@@ -1,15 +1,20 @@
 import { Pressable, Text, View, useColorScheme } from 'react-native';
 import React from 'react';
-import { useSearchParams } from 'expo-router/build/hooks';
+import {
+	useGlobalSearchParams,
+	useLocalSearchParams,
+	useSearchParams,
+} from 'expo-router/build/hooks';
 
 import DatapikerDay from '@/components/DatapikerDay';
 import BookingOrder from '@/components/BookingOrder';
-export default function booking() {
+export default function Booking() {
 	const colorScheme = useColorScheme();
 
-	const { propKey }: any = useSearchParams();
-
-	console.log(propKey);
+	const { booking }: any = useLocalSearchParams();
+	// const global: any = useGlobalSearchParams();
+	// console.log(global);
+	console.log(booking);
 	return (
 		<View
 			className='-h-screen-safe-offset-1'
@@ -24,7 +29,7 @@ export default function booking() {
 					justifyContent: 'center',
 					alignItems: 'center',
 					padding: 10,
-					borderRadius: 5,
+					borderRadius: 20,
 					marginBottom: 60,
 					marginHorizontal: 60,
 				}}

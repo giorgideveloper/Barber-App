@@ -12,9 +12,10 @@ export default function HomeScreen() {
 		phone: '',
 		password: '',
 	});
+	const [user, setUser] = useState(null);
 	const handleRegister = () => {
 		// TODO: Implement backend registration logic
-		console.log(form);
+		console.log(user);
 	};
 	return (
 		<SafeAreaProvider>
@@ -58,13 +59,13 @@ export default function HomeScreen() {
 							</Text>
 						</View>
 						<View>
-							<AvalibleBarbers />
+							<AvalibleBarbers setUser={setUser} />
 						</View>
 						<View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
 							<Link
 								href={{
-									pathname: '/Booking',
-									params: { propKey: 'propValue' }, // Pass props as query parameters
+									pathname: '/[booking]',
+									params: { booking: user ?? '' },
 								}}
 								asChild
 							>
