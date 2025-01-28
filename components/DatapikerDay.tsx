@@ -17,19 +17,15 @@ const DatapikerDay: React.FC = () => {
 	const [selectedDate, setSelectedDate] = useState<string | null>(null);
 	const [selectedTime, setSelectedTime] = useState<string | null>(null);
 
-	// Generate days for the current week
 	const generateWeekDates = () => {
 		const today = dayjs();
-		const startOfWeek = today.startOf('week');
 		return Array.from({ length: 7 }, (_, index) =>
-			startOfWeek.add(index, 'day').format('YYYY-MM-DD')
+			today.add(index, 'day').format('YYYY-MM-DD')
 		);
 	};
-
 	const weekDates = generateWeekDates();
 
 	const timeSlots: TimeSlot[] = [
-		{ time: '09:00 AM', booked: false },
 		{ time: '10:00 AM', booked: false },
 		{ time: '11:00 AM', booked: false },
 		{ time: '12:00 PM', booked: true },
@@ -46,7 +42,7 @@ const DatapikerDay: React.FC = () => {
 
 	const handleDateSelect = (date: string) => {
 		setSelectedDate(date);
-		setSelectedTime(null); // Reset time selection on date change
+		setSelectedTime(null);
 	};
 
 	const handleTimeSelect = (time: string, booked: boolean) => {
@@ -57,9 +53,13 @@ const DatapikerDay: React.FC = () => {
 
 	return (
 		<View style={styles.container}>
-			<Text style={styles.title}>Date & Time</Text>
+			<Text
+				style={styles.title}
+				className='text-start p-2 pr-7 tracking-wider rounded-2xl drop-shadow-2xl text-white font-bold text-xl'
+			>
+				Date & Time
+			</Text>
 
-			{/* Horizontal Week Calendar */}
 			<View style={styles.calendarContainer}>
 				<FlatList
 					data={weekDates}
@@ -79,12 +79,12 @@ const DatapikerDay: React.FC = () => {
 								<Text
 									style={[styles.dayText, isSelected && styles.selectedText]}
 								>
-									{dayjs(item).format('dd')} {/* SU, MO, TU */}
+									{dayjs(item).format('dd')}
 								</Text>
 								<Text
 									style={[styles.dateText, isSelected && styles.selectedText]}
 								>
-									{dayjs(item).format('D')} {/* Day of the month */}
+									{dayjs(item).format('D')}
 								</Text>
 							</TouchableOpacity>
 						);
@@ -92,7 +92,6 @@ const DatapikerDay: React.FC = () => {
 				/>
 			</View>
 
-			{/* Time Slots */}
 			<Text style={styles.subtitle}>
 				{selectedDate ? `Selected Date: ${selectedDate}` : 'Select a Date'}
 			</Text>
@@ -132,14 +131,15 @@ const DatapikerDay: React.FC = () => {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
 		padding: 20,
-		backgroundColor: '#F9F9F9',
+		backgroundColor: '#F3ECDA',
 	},
 	title: {
-		fontSize: 20,
+		width: '40%',
+		fontSize: 18,
 		fontWeight: 'bold',
 		marginBottom: 10,
+		backgroundColor: '#808769',
 	},
 	subtitle: {
 		fontSize: 16,
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
 		padding: 10,
 		marginHorizontal: 5,
 		borderRadius: 8,
-		backgroundColor: '#E0E0E0',
+		backgroundColor: '#fff',
 	},
 	selectedDateContainer: {
 		backgroundColor: '#FF5722',
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		borderRadius: 8,
-		backgroundColor: '#E0E0E0',
+		backgroundColor: '#fff',
 	},
 	bookedSlot: {
 		backgroundColor: '#A5D6A7',
