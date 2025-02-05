@@ -17,6 +17,7 @@ export default function HomeScreen() {
 		// TODO: Implement backend registration logic
 		console.log(user);
 	};
+
 	return (
 		<SafeAreaProvider>
 			<SafeAreaView edges={['top']}>
@@ -65,7 +66,7 @@ export default function HomeScreen() {
 							<Link
 								href={{
 									pathname: '/[booking]',
-									params: { booking: user ?? '' },
+									params: { booking: JSON.stringify(user) ?? '' },
 								}}
 								asChild
 							>

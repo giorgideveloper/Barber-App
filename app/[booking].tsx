@@ -1,28 +1,25 @@
 import { Pressable, Text, View, useColorScheme } from 'react-native';
 import React from 'react';
-import {
-	useGlobalSearchParams,
-	useLocalSearchParams,
-	useSearchParams,
-} from 'expo-router/build/hooks';
-
+import { useLocalSearchParams } from 'expo-router/build/hooks';
 import DatapikerDay from '@/components/DatapikerDay';
 import BookingOrder from '@/components/BookingOrder';
+
 export default function Booking() {
 	const colorScheme = useColorScheme();
 
 	const { booking }: any = useLocalSearchParams();
 	// const global: any = useGlobalSearchParams();
 	// console.log(global);
-	console.log(booking);
+
 	return (
 		<View
 			className='-h-screen-safe-offset-1'
 			style={{ backgroundColor: '#F3ECDA' }}
 		>
-			<BookingOrder />
+			<BookingOrder booking={booking} />
 
 			<DatapikerDay />
+
 			<Pressable
 				style={{
 					backgroundColor: '#FA7235',

@@ -2,12 +2,21 @@ import React from 'react';
 import { ScrollView, StyleSheet, View, Text, Image } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
-const BookingOrder = () => {
+type BookingOrderProps = {
+	booking: {
+		id: string;
+		name: string;
+		email: string;
+		image: string; // Ensure this is a valid URL or require statement
+	};
+};
+
+const BookingOrder: React.FC<BookingOrderProps> = ({ booking }) => {
 	const RenderItem = () => (
 		<View style={styles.item}>
 			<Image />
 			<View style={{ marginLeft: 16 }}>
-				<Text style={styles.name}></Text>
+				<Text style={styles.name}>{booking.name}</Text>
 				<Text style={styles.email}></Text>
 			</View>
 		</View>

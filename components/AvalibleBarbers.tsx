@@ -40,14 +40,14 @@ const App = ({ setUser }: any) => {
 		},
 	];
 
-	const handlePress = (id: string) => {
-		setSelectedId(id);
-		setUser(id);
+	const handlePress = (item: any) => {
+		setSelectedId(item.id);
+		setUser(item);
 	};
 
 	const renderItem = ({ item }: { item: User }) => (
 		<TouchableOpacity
-			onPress={() => handlePress(item.id)}
+			onPress={() => handlePress(item)}
 			style={[
 				styles.item,
 				item.id === selectedId ? styles.selected : styles.item,
