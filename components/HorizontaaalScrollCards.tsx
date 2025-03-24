@@ -2,22 +2,22 @@ import React from 'react';
 import { ScrollView, Text, View, Image, TouchableOpacity } from 'react-native';
 
 const HorizontalScrollCards = ({ selectedBarber, setSelectedBarber }: any) => {
-	const [selectedId, setSelectedId] = React.useState<number | null>(null);
+
 	const cards = [
 		{
 			id: 1,
-			title: 'Card 1',
+			title: 'Beard',
 			image: 'https://icon-library.com/images/barber-icon/barber-icon-11.jpg',
 		},
 		{
 			id: 2,
-			title: 'Card 2',
-			image: 'https://www.freeiconspng.com/uploads/barber-scissors-icon-12.png',
+			title: 'Hair',
+			image: 'https://icon-library.com/images/barber-icon/barber-icon-10.jpg',
 		},
-		{ id: 3, title: 'Card 3', image: '../assets/images/barber.png' },
-		{ id: 6, title: 'Card 4', image: 'https://via.placeholder.com/150' },
-		{ id: 7, title: 'Card 4', image: 'https://via.placeholder.com/150' },
-		{ id: 8, title: 'Card 4', image: 'https://via.placeholder.com/150' },
+		{ id: 3, title: 'Card 3', image: 'https://icon-library.com/images/barber-icon/barber-icon-9.jpg' },
+		{ id: 6, title: 'Card 4', image: 'https://icon-library.com/images/barber-icon/barber-icon-12.jpg' },
+		{ id: 7, title: 'Card 4', image: 'https://icon-library.com/images/barber-icon/barber-icon-13.jpg' },
+		{ id: 8, title: 'Card 4', image: 'https://icon-library.com/images/barber-icon/barber-icon-14.jpg' },
 	];
 	const handlePress = (card: any) => {
 		setSelectedBarber(card);
@@ -50,8 +50,8 @@ const HorizontalScrollCards = ({ selectedBarber, setSelectedBarber }: any) => {
 						}}
 					>
 						<Image
-							source={require('../assets/images/barber.png')}
-							// source={{ uri: card.image }}
+						
+							source={{ uri: card.image }}
 							className='h-20 w-20'
 							resizeMode='cover'
 						/>

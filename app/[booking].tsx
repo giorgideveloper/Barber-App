@@ -6,18 +6,18 @@ import BookingOrder from '@/components/BookingOrder';
 
 export default function Booking() {
 	const colorScheme = useColorScheme();
-
-	const { booking }: any = useLocalSearchParams();
-	// const global: any = useGlobalSearchParams();
-	// console.log(global);
+	const { booking } = useLocalSearchParams();
+	
+	// Parse the booking data from URL parameters
+	const bookingData = booking ? JSON.parse(booking as string) : null;
+	console.log('Booking Data:', bookingData);
 
 	return (
 		<View
 			className='-h-screen-safe-offset-1'
 			style={{ backgroundColor: '#F3ECDA' }}
 		>
-			<BookingOrder booking={booking} />
-
+			<BookingOrder bookingUser={bookingData?.user} bookingBarber={bookingData?.selectedBarber} />
 			<DatapikerDay />
 
 			<Pressable
@@ -27,7 +27,7 @@ export default function Booking() {
 					alignItems: 'center',
 					padding: 10,
 					borderRadius: 20,
-					marginBottom: 60,
+					marginBottom: 120,
 					marginHorizontal: 60,
 				}}
 			>

@@ -3,24 +3,35 @@ import { ScrollView, StyleSheet, View, Text, Image } from 'react-native';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 type BookingOrderProps = {
-	booking: {
+	bookingUser: {
 		id: string;
 		name: string;
 		email: string;
-		image: string; // Ensure this is a valid URL or require statement
-	};
+		image: any;
+	} | null;
+	bookingBarber: {
+		id: string;
+		title: string;
+		email: string;
+		image: any;
+	} | null;
 };
 
-const BookingOrder: React.FC<BookingOrderProps> = ({ booking }) => {
-	const RenderItem = () => (
+const BookingOrder: React.FC<BookingOrderProps> = ({ bookingUser, bookingBarber }) => {
+
+	const RenderItem = (item: { image: any; name: string; email: string }) => (
 		<View style={styles.item}>
-			<Image />
+			<Image 
+				source={typeof item?.image === 'string' ? { uri: item?.image } : item?.image} 
+				style={styles.image} 
+			/>
 			<View style={{ marginLeft: 16 }}>
-				<Text style={styles.name}>{booking.name}</Text>
-				<Text style={styles.email}></Text>
+				<Text style={styles.name}>{item?.name}</Text>
+				<Text style={styles.email}>{item?.email}</Text>
 			</View>
 		</View>
 	);
+
 	return (
 		<SafeAreaProvider>
 			<SafeAreaView>
@@ -40,8 +51,8 @@ const BookingOrder: React.FC<BookingOrderProps> = ({ booking }) => {
 								Your Order
 							</Text>
 						</View>
-						<RenderItem />
-						<RenderItem />
+						<RenderItem image={bookingUser?.image || ''} name={bookingUser?.name || ''} email={bookingUser?.email || ''} />
+						<RenderItem image={bookingBarber?.image || ''} name={bookingBarber?.title || ''} email={bookingBarber?.email || ''} />
 					</View>
 				</ScrollView>
 			</SafeAreaView>
@@ -78,6 +89,7 @@ const styles = StyleSheet.create({
 	image: {
 		width: 40,
 		height: 40,
+		borderRadius: 20,
 	},
 });
 
