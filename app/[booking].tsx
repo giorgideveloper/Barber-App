@@ -1,5 +1,5 @@
 import { Pressable, Text, View, useColorScheme } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocalSearchParams } from 'expo-router/build/hooks';
 import DatapikerDay from '@/components/DatapikerDay';
 import BookingOrder from '@/components/BookingOrder';
@@ -10,7 +10,10 @@ export default function Booking() {
 	
 	// Parse the booking data from URL parameters
 	const bookingData = booking ? JSON.parse(booking as string) : null;
-	console.log('Booking Data:', bookingData);
+	const [selectedDate, setSelectedDate] = useState<string | null>(null);
+	const [selectedTime, setSelectedTime] = useState<string | null>(null);
+	console.log('Booking Data:', selectedDate);
+	console.log('Booking Data:', selectedTime);
 
 	return (
 		<View
@@ -18,7 +21,13 @@ export default function Booking() {
 			style={{ backgroundColor: '#F3ECDA' }}
 		>
 			<BookingOrder bookingUser={bookingData?.user} bookingBarber={bookingData?.selectedBarber} />
-			<DatapikerDay />
+			<DatapikerDay 
+				selectedDate={selectedDate || ''} 
+				selectedTime={selectedTime || ''} 
+				setSelectedDate={setSelectedDate} 
+				setSelectedTime={setSelectedTime}
+			
+			/>
 
 			<Pressable
 				style={{

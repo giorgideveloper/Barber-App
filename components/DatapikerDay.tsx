@@ -13,9 +13,14 @@ interface TimeSlot {
 	booked: boolean;
 }
 
-const DatapikerDay: React.FC = () => {
-	const [selectedDate, setSelectedDate] = useState<string | null>(null);
-	const [selectedTime, setSelectedTime] = useState<string | null>(null);
+interface DatapikerDayProps {
+  selectedDate: string;
+  setSelectedDate: (date: string) => void;
+  selectedTime: string | null;
+  setSelectedTime: (time: string | null) => void;
+}
+
+const DatapikerDay: React.FC<DatapikerDayProps> = ({selectedDate, setSelectedDate, selectedTime, setSelectedTime}) => {
 
 	const generateWeekDates = () => {
 		const today = dayjs();
@@ -169,9 +174,7 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		color: '#000',
 	},
-	selectedText: {
-		color: '#FFF',
-	},
+	
 	timeContainer: {
 		marginTop: 10,
 	},
@@ -202,6 +205,7 @@ const styles = StyleSheet.create({
 		color: '#FFF',
 		fontWeight: 'bold',
 	},
+	
 });
 
 export default DatapikerDay;
