@@ -1,7 +1,7 @@
 import React from 'react';
 import { ScrollView, Text, View, Image, TouchableOpacity } from 'react-native';
 
-const HorizontalScrollCards = () => {
+const HorizontalScrollCards = ({ selectedBarber, setSelectedBarber }: any) => {
 	const [selectedId, setSelectedId] = React.useState<number | null>(null);
 	const cards = [
 		{
@@ -20,8 +20,8 @@ const HorizontalScrollCards = () => {
 		{ id: 8, title: 'Card 4', image: 'https://via.placeholder.com/150' },
 	];
 	const handlePress = (card: any) => {
-		setSelectedId(card.id);
-		console.log(card);
+		setSelectedBarber(card);
+
 	};
 
 	return (
@@ -46,7 +46,7 @@ const HorizontalScrollCards = () => {
 							position: 'relative',
 							margin: 5,
 							marginTop: 10,
-							backgroundColor: selectedId === card.id ? '#FA7235' : 'white',
+							backgroundColor: selectedBarber?.id === card.id ? '#FA7235' : 'white',
 						}}
 					>
 						<Image
@@ -59,7 +59,7 @@ const HorizontalScrollCards = () => {
 							className='text-lg font-semibold  font-bold'
 							style={{
 								marginTop: 5,
-								color: selectedId === card.id ? 'white' : '#FA7235',
+								color: selectedBarber?.id === card.id ? 'white' : '#FA7235',
 							}}
 						>
 							{card.title}

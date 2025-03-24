@@ -13,9 +13,12 @@ export default function HomeScreen() {
 		password: '',
 	});
 	const [user, setUser] = useState(null);
+	const [selectedBarber, setSelectedBarber] = useState<number | null>(null);
+	console.log(selectedBarber);
+	console.log(user);
 	const handleRegister = () => {
 		// TODO: Implement backend registration logic
-		console.log(user);
+		
 	};
 
 	return (
@@ -43,8 +46,8 @@ export default function HomeScreen() {
 								Available Service
 							</Text>
 						</View>
-						<HorizontalScrollCards />
-						//TODO: Implement AvalibleBarbers component
+						<HorizontalScrollCards selectedBarber={selectedBarber} setSelectedBarber={setSelectedBarber} />
+						{/* TODO: Implement AvalibleBarbers component */}
 						<View
 							style={{
 								flexDirection: 'row',
@@ -64,14 +67,17 @@ export default function HomeScreen() {
 						</View>
 						<View style={{ flexDirection: 'row', justifyContent: 'flex-end' }}>
 							<Link
-								href={{
+								href={selectedBarber && user ? {
 									pathname: '/[booking]',
-									params: { booking: JSON.stringify(user) ?? '' },
+									params: { booking: JSON.stringify({ user, selectedBarber }) ?? '' },
+								} : {
+									pathname: '/',
 								}}
 								asChild
 							>
 								<Pressable
 									style={{
+										opacity: selectedBarber && user ? 1 : 0.5,
 										backgroundColor: '#FA7235',
 										justifyContent: 'center',
 										alignItems: 'center',
